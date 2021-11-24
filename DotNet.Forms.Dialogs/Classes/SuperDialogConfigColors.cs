@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace DotNet.Forms.Dialogs.Classes
+﻿namespace DotNet.Forms.Dialogs.Classes
 {
     public class SuperDialogConfigColors
     {
@@ -63,7 +61,7 @@ namespace DotNet.Forms.Dialogs.Classes
         /// <summary>
         /// Default color <b>#38BDF8</b>
         /// </summary>
-        public SuperDialogColor Info
+        public SuperDialogColor Information
         {
             get
             {
@@ -93,49 +91,6 @@ namespace DotNet.Forms.Dialogs.Classes
                 _question = value;
             }
         }
-    }
-
-    public class SuperDialogColor
-    {
-        public Color Color { get; set; }
-
-        public string HEX
-        {
-            get
-            {
-                return "#" + Color.R.ToString("X2") + Color.G.ToString("X2") + Color.B.ToString("X2");
-            }
-            set
-            {
-                if (!value.StartsWith("#"))
-                {
-                    value = $"#{value}";
-                }
-
-                Color = ColorTranslator.FromHtml(value);
-            }
-        }
-
-        /// <summary>
-        /// Create a color from hexadecimal code.
-        /// </summary>
-        /// <param name="hex">Example: #F0F0F0</param>
-        public SuperDialogColor(string hex)
-        {
-            Color = ColorTranslator.FromHtml(hex);
-        }
-
-        /// <summary>
-        /// Create a color from RGB code.
-        /// </summary>
-        /// <param name="red">Example: 81</param>
-        /// <param name="green">Example: 247</param>
-        /// <param name="blue">Example: 203</param>
-        public SuperDialogColor(int red, int green, int blue)
-        {
-            Color = Color.FromArgb(red, green, blue);
-        }
-
     }
 }
 

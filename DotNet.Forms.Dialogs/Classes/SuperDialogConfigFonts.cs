@@ -1,27 +1,7 @@
-﻿using System.Drawing;
-
-namespace DotNet.Forms.Dialogs.Classes
+﻿namespace DotNet.Forms.Dialogs.Classes
 {
     public class SuperDialogConfigFonts
     {
-        private SuperDialogFont _title { get; set; }
-
-        /// <summary>
-        /// Default FontFamily is <b>Lucida Console</b>, and size is <b>18,</b> and style <b>bold</b>.
-        /// </summary>
-        public SuperDialogFont Title
-        {
-            get
-            {
-                if (_title == null) _title = new SuperDialogFont("Lucida Console", 18, true);
-
-                return _title;
-            }
-            set
-            {
-                _title = value;
-            }
-        }
         private SuperDialogFont _message { get; set; }
         /// <summary>
         /// Default FontFamily is <b>Lucida Console</b>, and size is <b>12</b> and style <b>regular</b>.
@@ -39,103 +19,24 @@ namespace DotNet.Forms.Dialogs.Classes
                 _message = value;
             }
         }
-    }
 
-    public class SuperDialogFont
-    {
-        public SuperDialogFont(string fontFamily, float fontSize, bool bold)
-        {
-            FontFamily = fontFamily;
-            Size = fontSize;
-            Bold = bold;
-        }
-
-        private Font _font { get; set; }
-
-
-        public Font Font
-        {
-            set
-            {
-                _font = value;
-            }
-            get
-            {
-                if (_font == null) _font = new Font("Lucida Console", 12);
-                return _font;
-            }
-        }
-
-        public string FontFamily
+        private SuperDialogFont _buttons { get; set; }
+        /// <summary>
+        /// Default FontFamily is <b>Lucida Console</b>, and size is <b>12</b> and style <b>regular</b>.
+        /// </summary>
+        public SuperDialogFont Buttons
         {
             get
             {
-                return _font.FontFamily.Name;
-            }
-            set
-            {
-                _font = new Font(value, this.Size);
-            }
+                if (_buttons == null) _buttons = new SuperDialogFont("Lucida Console", 12, false);
 
-        }
-        public float Size
-        {
-            get
-            {
-                return _font.Size;
+                return _buttons;
             }
             set
             {
-                _font = new Font(this.FontFamily, value);
+                _buttons = value;
             }
         }
-        public bool Bold
-        {
-            get
-            {
-                return _font.Style == FontStyle.Bold;
-            }
-            set
-            {
-                _font = new Font(this.FontFamily, this.Size, value ? FontStyle.Bold : FontStyle.Regular);
-
-            }
-        }
-        public bool Italic
-        {
-            get
-            {
-                return _font.Style == FontStyle.Italic;
-            }
-            set
-            {
-                _font = new Font(this.FontFamily, this.Size, value ? FontStyle.Italic : FontStyle.Regular);
-            }
-        }
-        public bool Underline
-        {
-            get
-            {
-                return _font.Style == FontStyle.Underline;
-            }
-            set
-            {
-                _font = new Font(this.FontFamily, this.Size, value ? FontStyle.Underline : FontStyle.Regular);
-            }
-        }
-
-        public bool Strikeout
-        {
-            get
-            {
-                return _font.Style == FontStyle.Strikeout;
-            }
-            set
-            {
-                _font = new Font(this.FontFamily, this.Size, value ? FontStyle.Strikeout : FontStyle.Regular);
-            }
-        }
-
     }
 }
 

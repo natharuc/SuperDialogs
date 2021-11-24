@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DotNet.Forms.Dialogs\DotNet.Forms.Dialogs.csproj" />
+  </ItemGroup>
+
 </Project>
