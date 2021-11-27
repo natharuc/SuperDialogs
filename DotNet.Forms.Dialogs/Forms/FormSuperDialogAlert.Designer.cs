@@ -155,7 +155,6 @@ namespace DotNet.Forms.Dialogs.Forms
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Title";
-            this.Load += new System.EventHandler(this.FormDotNetDialogAlert_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormDotNetDialogAlert_KeyDown);
             this.tableLayoutPanelPrincipal.ResumeLayout(false);
             this.tableLayoutPanelPrincipal.PerformLayout();

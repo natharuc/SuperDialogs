@@ -186,14 +186,6 @@ namespace DotNet.Forms.Dialogs.Forms
             }
         }
 
-        private void tableLayoutPanelPrincipal_Resize(object sender, EventArgs e)
-        {
 
-        }
-
-        private void FormDotNetDialogAlert_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
