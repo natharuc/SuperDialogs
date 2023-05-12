@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Update="Forms\FormSuperDialogPrompt.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 		<Compile Update="Forms\FormSuperDialogAlert.cs">
 			<SubType>Form</SubType>
 		</Compile>

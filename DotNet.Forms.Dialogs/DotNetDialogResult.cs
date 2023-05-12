@@ -52,6 +52,6 @@ namespace DotNet.Forms.Dialogs
                 return (_dialogResult != DialogResult.Yes && _dialogResult != DialogResult.No && _dialogResult != DialogResult.Cancel);
             }
         }
-        public T Value { get; private set; }
+        public T Value { get;  set; }
     }
 }

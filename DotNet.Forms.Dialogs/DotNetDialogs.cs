@@ -1,11 +1,13 @@
 ﻿
 using DotNet.Forms.Dialogs.Forms;
+using System;
 
 namespace DotNet.Forms.Dialogs
 {
     public class DotNetDialogs
     {
         private  static FormDotNetDialogAlert _formAlert { get; set; }
+        private  static FormSuperDialogPrompt _formPrompt { get; set; }
         private static FormDotNetDialogAlert FormAlert
         {
             get
@@ -17,6 +19,20 @@ namespace DotNet.Forms.Dialogs
             set
             {
                 _formAlert = value;
+            }
+        }
+
+        private static FormSuperDialogPrompt FormPrompt
+        {
+            get
+            {
+                if (_formPrompt == null) _formPrompt = new FormSuperDialogPrompt();
+
+                return _formPrompt;
+            }
+            set
+            {
+                _formPrompt = value;
             }
         }
 
@@ -65,6 +81,25 @@ namespace DotNet.Forms.Dialogs
             return new DotNetDialogResult<bool>(FormAlert.ShowDialog());
         }
 
+        public static DotNetDialogResult<T> Prompt<T>(string title, string message)
+        {
+            FormPrompt.Title = title;
+            FormPrompt.Message = message;
+            FormPrompt.SetQuestionStyle();
+
+            var dialogResult = FormPrompt.ShowDialog();
+
+            var result = new DotNetDialogResult<T>(dialogResult);
+
+            result.Value = FormPrompt.GetValue<T>();
+
+            return result;
+        }
+
+        public static DotNetDialogResult<bool> Danger(Exception ex)
+        {
+            return Danger("Erro", ex.Message);
+        }
     }
 }
 

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 namespace DotNet.Forms.Dialogs.Forms
 {
-    internal partial class FormDotNetDialogAlert : Form
+    internal partial class FormSuperDialogPrompt : Form
     {
         public string Title
         {
@@ -72,13 +73,12 @@ namespace DotNet.Forms.Dialogs.Forms
 
                 labelMessage.ForeColor = value;
                 buttonCancel.ForeColor = value;
-                buttonNo.ForeColor = value;
                 buttonYesOk.ForeColor = value;
                 AplyTheme();
             }
         }
 
-        public FormDotNetDialogAlert()
+        public FormSuperDialogPrompt()
         {
             InitializeComponent();
         }
@@ -96,7 +96,7 @@ namespace DotNet.Forms.Dialogs.Forms
 
             this.BackColor = formBackColor;
             buttonYesOk.BackColor = buttonsBackColor;
-            buttonNo.BackColor = buttonsBackColor;
+           
             buttonCancel.BackColor = buttonsBackColor;
         }
 
@@ -115,12 +115,10 @@ namespace DotNet.Forms.Dialogs.Forms
 
             #endregion
 
-            buttonNo.Text = SuperDialogGlobalConfig.Buttons.No.Text;
-
+          
             buttonCancel.Text = SuperDialogGlobalConfig.Buttons.Cancel.Text;
 
 
-            buttonNo.Font = SuperDialogGlobalConfig.Fonts.Buttons.Value;
             buttonCancel.Font = SuperDialogGlobalConfig.Fonts.Buttons.Value;
             buttonYesOk.Font = SuperDialogGlobalConfig.Fonts.Buttons.Value;
         }
@@ -133,7 +131,6 @@ namespace DotNet.Forms.Dialogs.Forms
         internal void SetQuestionStyle()
         {
             ShowYesButtonStyle = true;
-            buttonNo.Visible = true;
             buttonCancel.Visible = true;
             CurrentColor = SuperDialogGlobalConfig.Colors.Question.Value;
             CurrentImage = Properties.Resources.question;
@@ -142,7 +139,6 @@ namespace DotNet.Forms.Dialogs.Forms
         internal void SetDangerStyle()
         {
             ShowYesButtonStyle = false;
-            buttonNo.Visible = false;
             buttonCancel.Visible = false;
             CurrentColor = SuperDialogGlobalConfig.Colors.Danger.Value;
             CurrentImage = Properties.Resources.danger;
@@ -151,7 +147,6 @@ namespace DotNet.Forms.Dialogs.Forms
         internal void SetSuccessStyle()
         {
             ShowYesButtonStyle = false;
-            buttonNo.Visible = false;
             buttonCancel.Visible = false;
             CurrentColor = SuperDialogGlobalConfig.Colors.Success.Value;
             CurrentImage = Properties.Resources.success;
@@ -160,7 +155,6 @@ namespace DotNet.Forms.Dialogs.Forms
         internal void SetInformationStyle()
         {
             ShowYesButtonStyle = false;
-            buttonNo.Visible = false;
             buttonCancel.Visible = false;
             CurrentColor = SuperDialogGlobalConfig.Colors.Information.Value;
             CurrentImage = Properties.Resources.information;
@@ -169,7 +163,6 @@ namespace DotNet.Forms.Dialogs.Forms
         internal void SetWarningStyle()
         {
             ShowYesButtonStyle = false;
-            buttonNo.Visible = false;
             buttonCancel.Visible = false;
             CurrentColor = SuperDialogGlobalConfig.Colors.Warning.Value;
             CurrentImage = Properties.Resources.warning;
@@ -186,6 +179,27 @@ namespace DotNet.Forms.Dialogs.Forms
             }
         }
 
+        private void labelMessage_Click_1(object sender, EventArgs e)
+        {
 
+        }
+
+        internal T GetValue<T>()
+        {
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                if (converter != null)
+                {
+                    // Cast ConvertFromString(string text) : object to (T)
+                    return (T)converter.ConvertFromString(textBoxImput.Text.Trim());
+                }
+                return default(T);
+            }
+            catch (NotSupportedException)
+            {
+                return default(T);
+            }
+        }
     }
 }

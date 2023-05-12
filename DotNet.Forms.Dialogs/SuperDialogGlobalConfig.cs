@@ -60,7 +60,7 @@ namespace DotNet.Forms.Dialogs
             }
         }
 
-        public static bool Dark { get; set; }
+        public static bool DarkMode { get; set; }
     }
 }
 
