@@ -25,7 +25,6 @@ namespace DotNet.Forms.Dialogs.Forms
             }
             set
             {
-                this.Size = new Size(473, 263);
                 labelMessage.Font = SuperDialogGlobalConfig.Fonts.Message.Value;
                 labelMessage.Text = value;
             }
@@ -96,7 +95,7 @@ namespace DotNet.Forms.Dialogs.Forms
 
             this.BackColor = formBackColor;
             buttonYesOk.BackColor = buttonsBackColor;
-           
+
             buttonCancel.BackColor = buttonsBackColor;
         }
 
@@ -115,7 +114,7 @@ namespace DotNet.Forms.Dialogs.Forms
 
             #endregion
 
-          
+
             buttonCancel.Text = SuperDialogGlobalConfig.Buttons.Cancel.Text;
 
 

@@ -33,8 +33,8 @@ namespace DotNet.Forms.Dialogs.Forms
             panelButtons = new System.Windows.Forms.Panel();
             buttonCancel = new System.Windows.Forms.Button();
             buttonYesOk = new System.Windows.Forms.Button();
-            labelMessage = new System.Windows.Forms.Label();
             pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            labelMessage = new System.Windows.Forms.Label();
             panelImput = new System.Windows.Forms.Panel();
             textBoxImput = new System.Windows.Forms.TextBox();
             tableLayoutPanelPrincipal.SuspendLayout();
@@ -103,6 +103,18 @@ namespace DotNet.Forms.Dialogs.Forms
             buttonYesOk.Text = "Yes";
             buttonYesOk.UseVisualStyleBackColor = false;
             // 
+            // pictureBoxIcon
+            // 
+            pictureBoxIcon.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBoxIcon.Image = Properties.Resources.success;
+            pictureBoxIcon.InitialImage = null;
+            pictureBoxIcon.Location = new System.Drawing.Point(3, 3);
+            pictureBoxIcon.Name = "pictureBoxIcon";
+            pictureBoxIcon.Size = new System.Drawing.Size(37, 29);
+            pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBoxIcon.TabIndex = 0;
+            pictureBoxIcon.TabStop = false;
+            // 
             // labelMessage
             // 
             labelMessage.AutoSize = true;
@@ -116,18 +128,6 @@ namespace DotNet.Forms.Dialogs.Forms
             labelMessage.Text = "Message";
             labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             labelMessage.Click += labelMessage_Click_1;
-            // 
-            // pictureBoxIcon
-            // 
-            pictureBoxIcon.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBoxIcon.Image = Properties.Resources.success;
-            pictureBoxIcon.InitialImage = null;
-            pictureBoxIcon.Location = new System.Drawing.Point(3, 3);
-            pictureBoxIcon.Name = "pictureBoxIcon";
-            pictureBoxIcon.Size = new System.Drawing.Size(37, 29);
-            pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pictureBoxIcon.TabIndex = 0;
-            pictureBoxIcon.TabStop = false;
             // 
             // panelImput
             // 
@@ -145,6 +145,7 @@ namespace DotNet.Forms.Dialogs.Forms
             textBoxImput.Dock = System.Windows.Forms.DockStyle.Fill;
             textBoxImput.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxImput.Location = new System.Drawing.Point(10, 10);
+            textBoxImput.Multiline = true;
             textBoxImput.Name = "textBoxImput";
             textBoxImput.Size = new System.Drawing.Size(421, 25);
             textBoxImput.TabIndex = 0;
