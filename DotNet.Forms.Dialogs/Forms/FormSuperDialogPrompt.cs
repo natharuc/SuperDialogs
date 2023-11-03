@@ -6,6 +6,8 @@ namespace DotNet.Forms.Dialogs.Forms
 {
     internal partial class FormSuperDialogPrompt : Form
     {
+        private readonly Type _valueType;
+
         public string Title
         {
             get
@@ -77,9 +79,11 @@ namespace DotNet.Forms.Dialogs.Forms
             }
         }
 
-        public FormSuperDialogPrompt()
+        public FormSuperDialogPrompt(Type valueType)
         {
             InitializeComponent();
+
+            _valueType = valueType;
         }
 
         private void AplyTheme()
@@ -178,9 +182,89 @@ namespace DotNet.Forms.Dialogs.Forms
             }
         }
 
-        private void labelMessage_Click_1(object sender, EventArgs e)
+
+
+        private void textBoxImput_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+
+                    if (IsNotValidValue()) return;
+
+                    DialogResult = DialogResult.OK;
+
+                    Close();
+
+                    break;
+                case Keys.Escape:
+                    DialogResult = DialogResult.Abort;
+                    Close();
+                    break;
+            }
+        }
+
+        public bool IsNotValidValue()
         {
 
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(_valueType);
+                if (converter != null)
+                {
+                    // Cast ConvertFromString(string text) : object to (T)
+                    _ = converter.ConvertFromString(textBoxImput.Text.Trim());
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                labelValidation.Text = ex.Message;
+
+                labelValidation.Visible = true;
+
+                return true;
+            }
+
+        }
+
+        private void textBoxImput_TextChanged(object sender, EventArgs e)
+        {
+            labelValidation.Visible = false;
+        }
+
+        private void buttonYesOk_Click(object sender, EventArgs e)
+        {
+            if (IsNotValidValue()) return;
+
+            DialogResult = DialogResult.OK;
+
+            Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Abort;
+
+            Close();
+        }
+
+        private void labelValidation_VisibleChanged(object sender, EventArgs e)
+        {
+            CorrectSize();
+        }
+
+        private void CorrectSize()
+        {
+            if (labelValidation.Visible)
+            {
+                this.Size = new Size(this.Size.Width, this.Size.Height + labelValidation.Size.Height);
+            }
+            else
+            {
+                this.Size = new Size(this.Size.Width, this.Size.Height - labelValidation.Size.Height);
+            }
         }
 
         internal T GetValue<T>()
@@ -188,6 +272,7 @@ namespace DotNet.Forms.Dialogs.Forms
             try
             {
                 var converter = TypeDescriptor.GetConverter(typeof(T));
+
                 if (converter != null)
                 {
                     // Cast ConvertFromString(string text) : object to (T)

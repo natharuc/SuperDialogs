@@ -1,99 +1,67 @@
 ﻿
 using DotNet.Forms.Dialogs.Forms;
 using System;
+using System.Windows.Forms;
 
 namespace DotNet.Forms.Dialogs
 {
     public class DotNetDialogs
     {
-        private  static FormDotNetDialogAlert _formAlert { get; set; }
-        private  static FormSuperDialogPrompt _formPrompt { get; set; }
-        private static FormDotNetDialogAlert FormAlert
+        private static DialogResult GetDialogResult(string title, string message, Action<FormDotNetDialogAlert> action)
         {
-            get
+            using (var form = new FormDotNetDialogAlert())
             {
-                if (_formAlert == null) _formAlert = new FormDotNetDialogAlert();
-
-                return _formAlert;
-            }
-            set
-            {
-                _formAlert = value;
-            }
-        }
-
-        private static FormSuperDialogPrompt FormPrompt
-        {
-            get
-            {
-                if (_formPrompt == null) _formPrompt = new FormSuperDialogPrompt();
-
-                return _formPrompt;
-            }
-            set
-            {
-                _formPrompt = value;
+                form.Title = title;
+                form.Message = message;
+                action(form);
+                return form.ShowDialog();
             }
         }
 
         public static DotNetDialogResult<bool> Question(string title, string message)
         {
-            FormAlert.Title = title;
-            FormAlert.Message = message;
-            FormAlert.SetQuestionStyle();
-
-            return new DotNetDialogResult<bool>(FormAlert.ShowDialog());
+            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetInformationStyle()));
         }
 
         public static DotNetDialogResult<bool> Information(string title, string message)
         {
-            FormAlert.Title = title;
-            FormAlert.Message = message;
-            FormAlert.SetInformationStyle();
-
-            return new DotNetDialogResult<bool>(FormAlert.ShowDialog());
+            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetInformationStyle()));
         }
 
         public static DotNetDialogResult<bool> Danger(string title, string message)
         {
-            FormAlert.Title = title;
-            FormAlert.Message = message;
-            FormAlert.SetDangerStyle();
-
-            return new DotNetDialogResult<bool>(FormAlert.ShowDialog());
+            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetDangerStyle()));
         }
 
         public static DotNetDialogResult<bool> Success(string title, string message)
         {
-            FormAlert.Title = title;
-            FormAlert.Message = message;
-            FormAlert.SetSuccessStyle();
-
-            return new DotNetDialogResult<bool>(FormAlert.ShowDialog());
+            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetSuccessStyle()));
         }
 
         public static DotNetDialogResult<bool> Warning(string title, string message)
         {
-            FormAlert.Title = title;
-            FormAlert.Message = message;
-            FormAlert.SetWarningStyle();
-
-            return new DotNetDialogResult<bool>(FormAlert.ShowDialog());
+            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetWarningStyle()));
         }
 
         public static DotNetDialogResult<T> Prompt<T>(string title, string message)
         {
-            FormPrompt.Title = title;
-            FormPrompt.Message = message;
-            FormPrompt.SetQuestionStyle();
+            using (var formPrompt = new FormSuperDialogPrompt(typeof(T)))
+            {
+                formPrompt.Title = title;
+                
+                formPrompt.Message = message;
+                
+                formPrompt.SetQuestionStyle();
 
-            var dialogResult = FormPrompt.ShowDialog();
+                var dialogResult = formPrompt.ShowDialog();
 
-            var result = new DotNetDialogResult<T>(dialogResult);
+                var result = new DotNetDialogResult<T>(dialogResult)
+                {
+                    Value = formPrompt.GetValue<T>()
+                };
 
-            result.Value = FormPrompt.GetValue<T>();
-
-            return result;
+                return result;
+            }
         }
 
         public static DotNetDialogResult<bool> Danger(Exception ex)

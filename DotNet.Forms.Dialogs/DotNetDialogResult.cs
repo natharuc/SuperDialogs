@@ -53,5 +53,13 @@ namespace DotNet.Forms.Dialogs
             }
         }
         public T Value { get;  set; }
+
+        public bool HasValue
+        {
+            get
+            {
+                return Value != null;
+            }
+        }
     }
 }
