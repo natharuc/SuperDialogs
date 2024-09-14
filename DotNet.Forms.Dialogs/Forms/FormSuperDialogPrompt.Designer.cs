@@ -59,11 +59,11 @@ namespace DotNet.Forms.Dialogs.Forms
             tableLayoutPanelPrincipal.Location = new System.Drawing.Point(5, 5);
             tableLayoutPanelPrincipal.Name = "tableLayoutPanelPrincipal";
             tableLayoutPanelPrincipal.RowCount = 4;
-            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanelPrincipal.Size = new System.Drawing.Size(444, 176);
+            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanelPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            tableLayoutPanelPrincipal.Size = new System.Drawing.Size(444, 169);
             tableLayoutPanelPrincipal.TabIndex = 0;
             // 
             // labelValidation
@@ -73,14 +73,13 @@ namespace DotNet.Forms.Dialogs.Forms
             labelValidation.Enabled = false;
             labelValidation.Font = new System.Drawing.Font("Lucida Console", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             labelValidation.ForeColor = System.Drawing.Color.Firebrick;
-            labelValidation.Location = new System.Drawing.Point(3, 89);
+            labelValidation.Location = new System.Drawing.Point(3, 91);
             labelValidation.Name = "labelValidation";
-            labelValidation.Size = new System.Drawing.Size(438, 25);
+            labelValidation.Size = new System.Drawing.Size(438, 20);
             labelValidation.TabIndex = 2;
             labelValidation.Text = "Message";
             labelValidation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             labelValidation.Visible = false;
-            labelValidation.VisibleChanged += labelValidation_VisibleChanged;
             // 
             // panelButtons
             // 
@@ -88,19 +87,19 @@ namespace DotNet.Forms.Dialogs.Forms
             panelButtons.Controls.Add(buttonCancel);
             panelButtons.Controls.Add(buttonYesOk);
             panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelButtons.Location = new System.Drawing.Point(3, 117);
+            panelButtons.Location = new System.Drawing.Point(3, 114);
             panelButtons.Name = "panelButtons";
-            panelButtons.Size = new System.Drawing.Size(438, 56);
+            panelButtons.Size = new System.Drawing.Size(438, 52);
             panelButtons.TabIndex = 2;
             // 
             // buttonCancel
             // 
-            buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             buttonCancel.BackColor = System.Drawing.Color.White;
             buttonCancel.FlatAppearance.BorderSize = 0;
             buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonCancel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            buttonCancel.Location = new System.Drawing.Point(9, 13);
+            buttonCancel.Location = new System.Drawing.Point(9, 9);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new System.Drawing.Size(123, 33);
             buttonCancel.TabIndex = 0;
@@ -110,11 +109,12 @@ namespace DotNet.Forms.Dialogs.Forms
             // 
             // buttonYesOk
             // 
+            buttonYesOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             buttonYesOk.BackColor = System.Drawing.Color.White;
             buttonYesOk.FlatAppearance.BorderSize = 0;
             buttonYesOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonYesOk.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            buttonYesOk.Location = new System.Drawing.Point(302, 13);
+            buttonYesOk.Location = new System.Drawing.Point(302, 9);
             buttonYesOk.Name = "buttonYesOk";
             buttonYesOk.Size = new System.Drawing.Size(123, 33);
             buttonYesOk.TabIndex = 1;
@@ -129,20 +129,19 @@ namespace DotNet.Forms.Dialogs.Forms
             pictureBoxIcon.InitialImage = null;
             pictureBoxIcon.Location = new System.Drawing.Point(3, 3);
             pictureBoxIcon.Name = "pictureBoxIcon";
-            pictureBoxIcon.Size = new System.Drawing.Size(37, 30);
+            pictureBoxIcon.Size = new System.Drawing.Size(37, 33);
             pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxIcon.TabIndex = 0;
             pictureBoxIcon.TabStop = false;
             // 
             // labelMessage
             // 
-            labelMessage.AutoSize = true;
             labelMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             labelMessage.Font = new System.Drawing.Font("Lucida Console", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             labelMessage.Location = new System.Drawing.Point(46, 0);
             labelMessage.Name = "labelMessage";
             labelMessage.Padding = new System.Windows.Forms.Padding(5);
-            labelMessage.Size = new System.Drawing.Size(395, 36);
+            labelMessage.Size = new System.Drawing.Size(395, 39);
             labelMessage.TabIndex = 1;
             labelMessage.Text = "Message";
             labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,10 +151,10 @@ namespace DotNet.Forms.Dialogs.Forms
             tableLayoutPanelPrincipal.SetColumnSpan(panelImput, 2);
             panelImput.Controls.Add(textBoxImput);
             panelImput.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelImput.Location = new System.Drawing.Point(3, 39);
+            panelImput.Location = new System.Drawing.Point(3, 42);
             panelImput.Name = "panelImput";
             panelImput.Padding = new System.Windows.Forms.Padding(10);
-            panelImput.Size = new System.Drawing.Size(438, 47);
+            panelImput.Size = new System.Drawing.Size(438, 46);
             panelImput.TabIndex = 0;
             // 
             // textBoxImput
@@ -166,7 +165,7 @@ namespace DotNet.Forms.Dialogs.Forms
             textBoxImput.MaxLength = int.MaxValue;
             textBoxImput.Multiline = true;
             textBoxImput.Name = "textBoxImput";
-            textBoxImput.Size = new System.Drawing.Size(418, 27);
+            textBoxImput.Size = new System.Drawing.Size(418, 26);
             textBoxImput.TabIndex = 0;
             textBoxImput.TextChanged += textBoxImput_TextChanged;
             textBoxImput.KeyDown += textBoxImput_KeyDown;
@@ -175,9 +174,8 @@ namespace DotNet.Forms.Dialogs.Forms
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            AutoSize = true;
             BackColor = System.Drawing.SystemColors.ButtonFace;
-            ClientSize = new System.Drawing.Size(454, 186);
+            ClientSize = new System.Drawing.Size(454, 179);
             Controls.Add(tableLayoutPanelPrincipal);
             KeyPreview = true;
             MaximizeBox = false;
@@ -188,7 +186,6 @@ namespace DotNet.Forms.Dialogs.Forms
             Text = "Title";
             KeyDown += FormDotNetDialogAlert_KeyDown;
             tableLayoutPanelPrincipal.ResumeLayout(false);
-            tableLayoutPanelPrincipal.PerformLayout();
             panelButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).EndInit();
             panelImput.ResumeLayout(false);

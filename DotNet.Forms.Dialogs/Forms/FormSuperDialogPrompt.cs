@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DotNet.Forms.Dialogs.Services;
+using DotNet.Forms.Dialogs.Services.Extensions;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -28,7 +30,8 @@ namespace DotNet.Forms.Dialogs.Forms
             set
             {
                 labelMessage.Font = SuperDialogGlobalConfig.Fonts.Message.Value;
-                labelMessage.Text = value;
+                labelMessage.Text = MessageBreakLineService.BreakLine(value);
+                this.AdjustFormSize(labelMessage.Text, labelMessage.Font);
             }
         }
 
@@ -248,23 +251,6 @@ namespace DotNet.Forms.Dialogs.Forms
             DialogResult = DialogResult.Abort;
 
             Close();
-        }
-
-        private void labelValidation_VisibleChanged(object sender, EventArgs e)
-        {
-            CorrectSize();
-        }
-
-        private void CorrectSize()
-        {
-            if (labelValidation.Visible)
-            {
-                this.Size = new Size(this.Size.Width, this.Size.Height + labelValidation.Size.Height);
-            }
-            else
-            {
-                this.Size = new Size(this.Size.Width, this.Size.Height - labelValidation.Size.Height);
-            }
         }
 
         internal T GetValue<T>()

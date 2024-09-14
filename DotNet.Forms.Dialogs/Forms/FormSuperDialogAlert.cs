@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DotNet.Forms.Dialogs.Services;
+using DotNet.Forms.Dialogs.Services.Extensions;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 namespace DotNet.Forms.Dialogs.Forms
@@ -24,9 +26,9 @@ namespace DotNet.Forms.Dialogs.Forms
             }
             set
             {
-                this.Size = new Size(473, 263);
                 labelMessage.Font = SuperDialogGlobalConfig.Fonts.Message.Value;
-                labelMessage.Text = value;
+                labelMessage.Text = MessageBreakLineService.BreakLine(value);
+                this.AdjustFormSize(labelMessage.Text, labelMessage.Font);
             }
         }
 
@@ -183,9 +185,24 @@ namespace DotNet.Forms.Dialogs.Forms
                     DialogResult = DialogResult.Abort;
                     Close();
                     break;
+                case Keys.Y:
+                    if (buttonYesOk.Visible)
+                        buttonYesOk.PerformClick();
+                    break;
+                case Keys.N:
+                    if (buttonNo.Visible)
+                        buttonNo.PerformClick();
+                    break;
+                case Keys.C:
+                    if (buttonCancel.Visible)
+                        buttonCancel.PerformClick();
+                    break;
+            }
+
+            if(e.Control && e.KeyCode == Keys.C)
+            {
+                Clipboard.SetText(Message);
             }
         }
-
-
     }
 }

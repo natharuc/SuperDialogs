@@ -45,7 +45,7 @@ namespace DotNet.Forms.Dialogs.AppTest
 
         private void checkBoxDarkTheme_CheckedChanged(object sender, EventArgs e)
         {
-            SuperDialogGlobalConfig.Dark = checkBoxDarkTheme.Checked;
+            SuperDialogGlobalConfig.DarkMode = checkBoxDarkTheme.Checked;
         }
 
         private void buttonColorInformation_Click(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace DotNet.Forms.Dialogs.AppTest
             if (fontDialogMain.ShowDialog() == DialogResult.OK)
             {
                 button.Font = fontDialogMain.Font;
-                button.Text = $"{ button.Font.Name};{ button.Font.Size}pt"; 
+                button.Text = $"{button.Font.Name};{button.Font.Size}pt";
                 return fontDialogMain.Font;
             }
 
@@ -128,6 +128,21 @@ namespace DotNet.Forms.Dialogs.AppTest
         private void buttonMessageFont_Click(object sender, EventArgs e)
         {
             SuperDialogGlobalConfig.Fonts.Message.Value = SelectFontAndAplyToButton(buttonMessageFont);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTestPrompt_Click(object sender, EventArgs e)
+        {
+            var result = DotNetDialogs.Prompt<string>(textBoxTitle.Text, richTextBoxMessage.Text);
+
+            if (result.Value != null)
+            {
+                DotNetDialogs.Information("Result", result.Value);
+            }
         }
     }
 }
