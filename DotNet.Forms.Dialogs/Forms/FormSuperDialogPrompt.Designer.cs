@@ -38,6 +38,7 @@ namespace DotNet.Forms.Dialogs.Forms
             labelMessage = new System.Windows.Forms.Label();
             panelImput = new System.Windows.Forms.Panel();
             textBoxImput = new System.Windows.Forms.TextBox();
+            buttonSelectFile = new System.Windows.Forms.Button();
             tableLayoutPanelPrincipal.SuspendLayout();
             panelButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).BeginInit();
@@ -149,6 +150,7 @@ namespace DotNet.Forms.Dialogs.Forms
             // panelImput
             // 
             tableLayoutPanelPrincipal.SetColumnSpan(panelImput, 2);
+            panelImput.Controls.Add(buttonSelectFile);
             panelImput.Controls.Add(textBoxImput);
             panelImput.Dock = System.Windows.Forms.DockStyle.Fill;
             panelImput.Location = new System.Drawing.Point(3, 42);
@@ -169,6 +171,19 @@ namespace DotNet.Forms.Dialogs.Forms
             textBoxImput.TabIndex = 0;
             textBoxImput.TextChanged += textBoxImput_TextChanged;
             textBoxImput.KeyDown += textBoxImput_KeyDown;
+            // 
+            // buttonSelectFile
+            // 
+            buttonSelectFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            buttonSelectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            buttonSelectFile.Location = new System.Drawing.Point(10, 10);
+            buttonSelectFile.Margin = new System.Windows.Forms.Padding(0);
+            buttonSelectFile.Name = "buttonSelectFile";
+            buttonSelectFile.Size = new System.Drawing.Size(418, 26);
+            buttonSelectFile.TabIndex = 1;
+            buttonSelectFile.Text = "Select File";
+            buttonSelectFile.UseVisualStyleBackColor = true;
+            buttonSelectFile.Click += buttonSelectFile_Click;
             // 
             // FormSuperDialogPrompt
             // 
@@ -205,6 +220,7 @@ namespace DotNet.Forms.Dialogs.Forms
         private System.Windows.Forms.Panel panelImput;
         private System.Windows.Forms.TextBox textBoxImput;
         private System.Windows.Forms.Label labelValidation;
+        private System.Windows.Forms.Button buttonSelectFile;
     }
 }
 

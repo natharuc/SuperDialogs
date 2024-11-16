@@ -3,12 +3,28 @@ using DotNet.Forms.Dialogs.Services.Extensions;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 namespace DotNet.Forms.Dialogs.Forms
 {
     internal partial class FormSuperDialogPrompt : Form
     {
         private readonly Type _valueType;
+        
+        private bool _selectFile { get; set; }
+        public bool SelectFile
+        {
+            get
+            {
+                return _selectFile;
+            }
+            set
+            {
+                _selectFile = value;
+                textBoxImput.Visible = !value;
+                buttonSelectFile.Visible = value;
+            }
+        }
 
         public string Title
         {
@@ -78,6 +94,7 @@ namespace DotNet.Forms.Dialogs.Forms
                 labelMessage.ForeColor = value;
                 buttonCancel.ForeColor = value;
                 buttonYesOk.ForeColor = value;
+                buttonSelectFile.ForeColor = value;
                 AplyTheme();
             }
         }
@@ -87,6 +104,8 @@ namespace DotNet.Forms.Dialogs.Forms
             InitializeComponent();
 
             _valueType = valueType;
+
+            SelectFile = (_valueType == typeof(FileInfo));
         }
 
         private void AplyTheme()
@@ -102,7 +121,7 @@ namespace DotNet.Forms.Dialogs.Forms
 
             this.BackColor = formBackColor;
             buttonYesOk.BackColor = buttonsBackColor;
-
+            buttonSelectFile.BackColor = buttonsBackColor;
             buttonCancel.BackColor = buttonsBackColor;
         }
 
@@ -209,10 +228,25 @@ namespace DotNet.Forms.Dialogs.Forms
 
         public bool IsNotValidValue()
         {
+            if (SelectFile)
+            {
+                if (buttonSelectFile.Tag == null)
+                {
+                    labelValidation.Text = "Select a file";
+
+                    labelValidation.Visible = true;
+
+                    return true;
+                }
+
+                return false;
+            }
 
             try
             {
+
                 var converter = TypeDescriptor.GetConverter(_valueType);
+
                 if (converter != null)
                 {
                     // Cast ConvertFromString(string text) : object to (T)
@@ -220,6 +254,7 @@ namespace DotNet.Forms.Dialogs.Forms
                 }
 
                 return false;
+
             }
             catch (Exception ex)
             {
@@ -229,7 +264,6 @@ namespace DotNet.Forms.Dialogs.Forms
 
                 return true;
             }
-
         }
 
         private void textBoxImput_TextChanged(object sender, EventArgs e)
@@ -253,8 +287,22 @@ namespace DotNet.Forms.Dialogs.Forms
             Close();
         }
 
+        private void buttonSelectFile_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                buttonSelectFile.Text = dialog.FileName;
+                buttonSelectFile.Tag = new FileInfo(dialog.FileName);
+            }
+        }
+
         internal T GetValue<T>()
         {
+            if (SelectFile)
+                return (T)buttonSelectFile.Tag;
+
             try
             {
                 var converter = TypeDescriptor.GetConverter(typeof(T));
@@ -264,6 +312,7 @@ namespace DotNet.Forms.Dialogs.Forms
                     // Cast ConvertFromString(string text) : object to (T)
                     return (T)converter.ConvertFromString(textBoxImput.Text.Trim());
                 }
+
                 return default(T);
             }
             catch (NotSupportedException)
