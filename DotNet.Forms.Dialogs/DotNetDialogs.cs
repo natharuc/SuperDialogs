@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DotNet.Forms.Dialogs
 {
-    public class DotNetDialogs
+    public static class DotNetDialogs
     {
         private static DialogResult GetDialogResult(string title, string message, Action<FormDotNetDialogAlert> action)
         {
@@ -28,11 +28,6 @@ namespace DotNet.Forms.Dialogs
             return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetInformationStyle()));
         }
 
-        public static DotNetDialogResult<bool> Danger(string title, string message)
-        {
-            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetDangerStyle()));
-        }
-
         public static DotNetDialogResult<bool> Success(string title, string message)
         {
             return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetSuccessStyle()));
@@ -48,9 +43,9 @@ namespace DotNet.Forms.Dialogs
             using (var formPrompt = new FormSuperDialogPrompt(typeof(T)))
             {
                 formPrompt.Title = title;
-                
+
                 formPrompt.Message = message;
-                
+
                 formPrompt.SetQuestionStyle();
 
                 var dialogResult = formPrompt.ShowDialog();
@@ -64,6 +59,11 @@ namespace DotNet.Forms.Dialogs
             }
         }
 
+        public static DotNetDialogResult<bool> Danger(string title, string message)
+        {
+            return new DotNetDialogResult<bool>(GetDialogResult(title, message, (form) => form.SetDangerStyle()));
+        }
+        
         public static DotNetDialogResult<bool> Danger(Exception ex)
         {
             return Danger("Erro", ex.Message);
